@@ -46,7 +46,7 @@
                         "rgba(237, 129, 40, 0.89)",
                         "rgba(50, 172, 45, 0.97)"
                     ],
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": 2,
                     "editable": true,
                     "error": false,
@@ -96,7 +96,7 @@
                     },
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}",
+                            "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\",job=\"kubernetes-pods\", type=\"total\"}",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "refId": "A",
@@ -126,7 +126,7 @@
                         "rgba(237, 129, 40, 0.89)",
                         "rgba(50, 172, 45, 0.97)"
                     ],
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": 2,
                     "editable": true,
                     "error": false,
@@ -206,7 +206,7 @@
                         "rgba(237, 129, 40, 0.89)",
                         "rgba(245, 54, 54, 0.9)"
                     ],
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": 0,
                     "editable": true,
                     "error": false,
@@ -259,7 +259,7 @@
                             "calculatedInterval": "10m",
                             "datasourceErrors": {},
                             "errors": {},
-                            "expr": "1-(max(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"})/max(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"}))",
+                            "expr": "1-(max(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\",job=\"kubernetes-pods\", type=\"total\"})/max(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"}))",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "",
@@ -285,7 +285,7 @@
                         "rgba(237, 129, 40, 0.89)",
                         "rgba(245, 54, 54, 0.9)"
                     ],
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": 0,
                     "editable": true,
                     "error": false,
@@ -338,7 +338,7 @@
                             "calculatedInterval": "10m",
                             "datasourceErrors": {},
                             "errors": {},
-                            "expr": "avg(mongodb_mongod_wiredtiger_cache_pages{instance=\"$host\",type=\"dirty\"})/avg(mongodb_mongod_wiredtiger_cache_pages{instance=\"$host\",type=\"total\"})",
+                            "expr": "avg(mongodb_mongod_wiredtiger_cache_pages{instance=\"$host\",job=\"kubernetes-pods\",type=\"dirty\"})/avg(mongodb_mongod_wiredtiger_cache_pages{instance=\"$host\",job=\"kubernetes-pods\",type=\"total\"})",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "",
@@ -370,7 +370,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -451,7 +451,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -496,7 +496,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}",
+                            "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\",job=\"kubernetes-pods\", type=\"total\"}",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -555,7 +555,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -645,7 +645,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -735,7 +735,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -819,7 +819,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -911,7 +911,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -955,7 +955,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type=\"delete\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type=\"delete\"}[5m])",
+                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type=\"delete\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type=\"delete\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -964,7 +964,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type=\"update\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type=\"update\"}[5m])",
+                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type=\"update\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type=\"update\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -973,7 +973,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type=\"insert\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type=\"insert\"}[5m])",
+                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type=\"insert\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type=\"insert\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -1029,7 +1029,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -1063,7 +1063,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=\"$host\",type=\"modified\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=\"$host\",type=\"modified\"}[5m])",
+                            "expr": "rate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=\"$host\",job=\"kubernetes-pods\",type=\"modified\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=\"$host\",job=\"kubernetes-pods\",type=\"modified\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Evicted",
@@ -1121,7 +1121,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -1211,7 +1211,7 @@
                 {
                     "aliasColors": {},
                     "bars": false,
-                    "datasource": "Prometheus",
+                    "datasource": "prometheus",
                     "decimals": null,
                     "editable": true,
                     "error": false,
@@ -1313,7 +1313,7 @@
                     "text": "auto",
                     "value": "$__auto_interval"
                 },
-                "datasource": "Prometheus",
+                "datasource": "prometheus",
                 "hide": 0,
                 "includeAll": false,
                 "label": "Interval",
@@ -1369,7 +1369,7 @@
             {
                 "allFormat": "glob",
                 "allValue": null,
-                "datasource": "Prometheus",
+                "datasource": "prometheus",
                 "hide": 0,
                 "includeAll": true,
                 "label": "Cluster",
@@ -1387,7 +1387,7 @@
             {
                 "allFormat": "glob",
                 "allValue": null,
-                "datasource": "Prometheus",
+                "datasource": "prometheus",
                 "hide": 0,
                 "includeAll": false,
                 "label": "Instance",

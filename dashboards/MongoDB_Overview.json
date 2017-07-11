@@ -103,7 +103,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_op_counters_total{instance=\"$host\", type!=\"command\"}[$interval]) or irate(mongodb_mongod_op_counters_total{instance=\"$host\", type!=\"command\"}[5m])",
+                            "expr": "rate(mongodb_mongod_op_counters_total{instance=\"$host\",job=\"kubernetes-pods\", type!=\"command\"}[$interval]) or irate(mongodb_mongod_op_counters_total{instance=\"$host\",job=\"kubernetes-pods\", type!=\"command\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -112,7 +112,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type!~\"(command|query|getmore)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type!~\"(command|query|getmore)\"}[5m])",
+                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type!~\"(command|query|getmore)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\",job=\"kubernetes-pods\", type!~\"(command|query|getmore)\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -121,7 +121,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_ttl_deleted_documents_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_ttl_deleted_documents_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_ttl_deleted_documents_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_ttl_deleted_documents_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -227,7 +227,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_connections{instance=\"$host\", state=\"current\"}",
+                            "expr": "mongodb_mongod_connections{instance=\"$host\",job=\"kubernetes-pods\", state=\"current\"}",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -324,7 +324,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_metrics_cursor_open{instance=\"$host\"} or mongodb_mongod_cursors{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_metrics_cursor_open{instance=\"$host\",job=\"kubernetes-pods\"} or mongodb_mongod_cursors{instance=\"$host\",job=\"kubernetes-pods\"}",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -432,7 +432,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_document_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_document_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_document_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_document_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -528,7 +528,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_global_lock_current_queue{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_global_lock_current_queue{instance=\"$host\",job=\"kubernetes-pods\"}",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -632,7 +632,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "sum(increase(mongodb_mongod_metrics_query_executor_total{instance=\"$host\", state=\"scanned_objects\"}[5m]))/sum(increase(mongodb_mongod_metrics_document_total{instance=\"$host\", state=\"returned\"}[5m]))",
+                            "expr": "sum(increase(mongodb_mongod_metrics_query_executor_total{instance=\"$host\",job=\"kubernetes-pods\", state=\"scanned_objects\"}[5m]))/sum(increase(mongodb_mongod_metrics_document_total{instance=\"$host\",job=\"kubernetes-pods\", state=\"returned\"}[5m]))",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -641,7 +641,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "sum(increase(mongodb_mongod_metrics_query_executor_total{instance=\"$host\", state=\"scanned\"}[5m]))/sum(increase(mongodb_mongod_metrics_document_total{instance=\"$host\", state=\"returned\"}[5m]))",
+                            "expr": "sum(increase(mongodb_mongod_metrics_query_executor_total{instance=\"$host\",job=\"kubernetes-pods\", state=\"scanned\"}[5m]))/sum(increase(mongodb_mongod_metrics_document_total{instance=\"$host\",job=\"kubernetes-pods\", state=\"returned\"}[5m]))",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -729,7 +729,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_query_executor_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_query_executor_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_query_executor_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_query_executor_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "{{state}}",
@@ -738,7 +738,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_record_moves_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_record_moves_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_record_moves_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_record_moves_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "moved",
@@ -835,7 +835,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -931,7 +931,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_get_last_error_wtime_num_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_get_last_error_wtime_num_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_get_last_error_wtime_num_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_get_last_error_wtime_num_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -940,7 +940,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_get_last_error_wtimeouts_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_get_last_error_wtimeouts_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_get_last_error_wtimeouts_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_get_last_error_wtimeouts_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -1049,7 +1049,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_asserts_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_asserts_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_asserts_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_asserts_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -1142,7 +1142,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_extra_info_page_faults_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_extra_info_page_faults_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_extra_info_page_faults_total{instance=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_extra_info_page_faults_total{instance=\"$host\",job=\"kubernetes-pods\"}[5m])",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,

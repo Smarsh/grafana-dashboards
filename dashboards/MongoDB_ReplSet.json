@@ -110,7 +110,7 @@
                     },
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_replset_my_state{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "",
@@ -239,7 +239,7 @@
                     },
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_replset_number_of_members{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_replset_number_of_members{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "",
@@ -317,7 +317,7 @@
                     },
                     "targets": [
                         {
-                            "expr": "time() - mongodb_mongod_replset_member_election_date{instance=\"$host\"}",
+                            "expr": "time() - mongodb_mongod_replset_member_election_date{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "",
@@ -395,7 +395,7 @@
                     },
                     "targets": [
                         {
-                            "expr": "(max(mongodb_mongod_replset_member_optime_date{state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{instance=\"$host\"})) or vector(0)",
+                            "expr": "(max(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{job=\"kubernetes-pods\",instance=\"$host\"})) or vector(0)",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "",
@@ -474,7 +474,7 @@
                     },
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_storage_engine{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_storage_engine{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "5m",
                             "intervalFactor": 1,
                             "legendFormat": "{{ engine }}",
@@ -544,7 +544,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type!~\"(command|getmore|query)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type!~\"(command|getmore|query)\"}[5m])",
+                            "expr": "rate(mongodb_mongod_op_counters_repl_total{job=\"kubernetes-pods\",instance=\"$host\", type!~\"(command|getmore|query)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{job=\"kubernetes-pods\",instance=\"$host\", type!~\"(command|getmore|query)\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "{{type}}",
@@ -635,7 +635,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "time()-mongodb_mongod_replset_oplog_tail_timestamp{instance=\"$host\"}",
+                            "expr": "time()-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -645,7 +645,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "mongodb_mongod_replset_oplog_head_timestamp{instance=\"$host\"}-mongodb_mongod_replset_oplog_tail_timestamp{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_replset_oplog_head_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -751,7 +751,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "(max(mongodb_mongod_replset_member_optime_date{state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{instance=\"$host\"})) or vector(0)",
+                            "expr": "(max(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{job=\"kubernetes-pods\",instance=\"$host\"})) or vector(0)",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Lag",
@@ -842,7 +842,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "max(changes(mongodb_mongod_replset_member_election_date{instance=\"$host\"}[$interval]))",
+                            "expr": "max(changes(mongodb_mongod_replset_member_election_date{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]))",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Count",
@@ -948,7 +948,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_replset_member_uptime{instance=\"$host\"} * on (name) group_right(state) mongodb_mongod_replset_my_name",
+                            "expr": "mongodb_mongod_replset_member_uptime{job=\"kubernetes-pods\",instance=\"$host\"} * on (name) group_right(state) mongodb_mongod_replset_my_name",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -1043,7 +1043,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "time() - max(mongodb_mongod_replset_member_last_heartbeat{instance=\"$host\"}) by (name) * on (name) group_right mongodb_mongod_replset_my_name",
+                            "expr": "time() - max(mongodb_mongod_replset_member_last_heartbeat{job=\"kubernetes-pods\",instance=\"$host\"}) by (name) * on (name) group_right mongodb_mongod_replset_my_name",
                             "hide": false,
                             "interval": "$interval",
                             "intervalFactor": 1,
@@ -1150,7 +1150,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_replset_member_ping_ms{instance=\"$host\"} * on (name) group_right mongodb_mongod_replset_my_name",
+                            "expr": "mongodb_mongod_replset_member_ping_ms{job=\"kubernetes-pods\",instance=\"$host\"} * on (name) group_right mongodb_mongod_replset_my_name",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "{{instance}}",
@@ -1242,7 +1242,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "{{instance}}",
@@ -1346,7 +1346,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_num_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_num_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Document Preload",
@@ -1355,7 +1355,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_num_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_num_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Index Preload",
@@ -1364,7 +1364,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_apply_ops_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_ops_total{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_apply_ops_total{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_ops_total{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "intervalFactor": 2,
                             "legendFormat": "Batch Apply",
                             "refId": "C",
@@ -1455,7 +1455,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Document Preload",
@@ -1463,7 +1463,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Index Preload",
@@ -1472,7 +1472,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "rate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{instance=\"$host\"}[5m])",
+                            "expr": "rate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Batch Apply",
@@ -1577,7 +1577,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_metrics_repl_buffer_count{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_metrics_repl_buffer_count{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Current",
@@ -1669,7 +1669,7 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "expr": "mongodb_mongod_metrics_repl_buffer_size_bytes{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_metrics_repl_buffer_size_bytes{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Used",
@@ -1677,7 +1677,7 @@
                             "step": 300
                         },
                         {
-                            "expr": "mongodb_mongod_metrics_repl_buffer_max_size_bytes{instance=\"$host\"}",
+                            "expr": "mongodb_mongod_metrics_repl_buffer_max_size_bytes{job=\"kubernetes-pods\",instance=\"$host\"}",
                             "interval": "$interval",
                             "intervalFactor": 1,
                             "legendFormat": "Max",
@@ -1835,7 +1835,7 @@
                 "multi": false,
                 "multiFormat": "glob",
                 "name": "replset",
-                "query": "label_values(mongodb_mongod_replset_my_state{cluster=~\"$cluster\"}, set)",
+                "query": "label_values(mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",cluster=~\"$cluster\"}, set)",
                 "refresh": 1,
                 "regex": "",
                 "sort": 1,
@@ -1855,7 +1855,7 @@
                 "multi": false,
                 "multiFormat": "glob",
                 "name": "host",
-                "query": "label_values(mongodb_mongod_replset_my_state{cluster=~\"$cluster\", set=\"$replset\"}, instance)",
+                "query": "label_values(mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",cluster=~\"$cluster\", set=\"$replset\"}, instance)",
                 "refresh": 1,
                 "regex": "",
                 "sort": 1,
