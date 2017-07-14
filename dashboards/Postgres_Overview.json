@@ -1690,7 +1690,7 @@
         "multi": false,
         "name": "db",
         "options": [],
-        "query": "label_values(pg_stat_database_tup_fetched{job=~\".*kubernetes-service-endpoints\",instance=\"$host\",datname!~\"template.*|postgres\"},datname)",
+        "query": "label_values(pg_stat_database_tup_fetched{job=~\".*kubernetes-pods\",instance=\"$host\",datname!~\"template.*|postgres\"},datname)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
