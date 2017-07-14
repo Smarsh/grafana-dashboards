@@ -111,7 +111,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "interval": "5m",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -241,7 +241,9 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "mongodb_mongod_replset_number_of_members{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "avg(mongodb_mongod_replset_number_of_members{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"})",
+              "format": "time_series",
+              "hide": false,
               "interval": "5m",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -255,85 +257,6 @@
           "title": "ReplSet Members",
           "type": "singlestat",
           "valueFontSize": "80%",
-          "valueMaps": [],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "prometheus",
-          "decimals": 1,
-          "description": "Shows how long ago the last election occurred",
-          "editable": true,
-          "error": false,
-          "format": "s",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "125px",
-          "hideTimeOverride": true,
-          "id": 65,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "null",
-          "nullText": null,
-          "postfix": "s",
-          "postfixFontSize": "70%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "time() - mongodb_mongod_replset_member_election_date{job=\"kubernetes-pods\",instance=\"$host\"}",
-              "interval": "5m",
-              "intervalFactor": 1,
-              "legendFormat": "",
-              "metric": "",
-              "refId": "A",
-              "step": 300
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "1m",
-          "title": "ReplSet Last Election",
-          "type": "singlestat",
-          "valueFontSize": "70%",
           "valueMaps": [],
           "valueName": "current"
         },
@@ -399,7 +322,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "(max(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{job=\"kubernetes-pods\",instance=\"$host\"})) or vector(0)",
+              "expr": "(max(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"})) or vector(0)",
               "interval": "5m",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -415,86 +338,6 @@
           "valueFontSize": "80%",
           "valueMaps": [],
           "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "prometheus",
-          "decimals": 0,
-          "description": "Shows the storage engine used on the instance",
-          "editable": true,
-          "error": false,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "125px",
-          "hideTimeOverride": true,
-          "id": 78,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": null,
-          "nullPointMode": "null",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 3,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "mongodb_mongod_storage_engine{job=\"kubernetes-pods\",instance=\"$host\"}",
-              "interval": "5m",
-              "intervalFactor": 1,
-              "legendFormat": "{{ engine }}",
-              "metric": "",
-              "refId": "A",
-              "step": 300
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "1m",
-          "title": "Storage Engine",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [],
-          "valueName": "name"
         }
       ],
       "repeat": null,
@@ -552,12 +395,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_op_counters_repl_total{job=\"kubernetes-pods\",instance=\"$host\", type!~\"(command|getmore|query)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{job=\"kubernetes-pods\",instance=\"$host\", type!~\"(command|getmore|query)\"}[5m])",
+              "expr": "rate(mongodb_mongod_op_counters_repl_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\", type!~\"(command|getmore|query)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\", type!~\"(command|getmore|query)\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -647,7 +490,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "time()-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "time()-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -655,10 +498,10 @@
               "legendFormat": "Now to End",
               "metric": "",
               "refId": "J",
-              "step": 30
+              "step": 300
             },
             {
-              "expr": "mongodb_mongod_replset_oplog_head_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_replset_oplog_head_timestamp{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -666,7 +509,7 @@
               "legendFormat": "Oplog Range",
               "metric": "",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -769,12 +612,13 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(max(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{job=\"kubernetes-pods\",instance=\"$host\"})) or vector(0)",
+              "expr": "(max(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"PRIMARY\", set=\"$replset\"}) - min(mongodb_mongod_replset_member_optime_date{job=\"kubernetes-pods\",state=\"SECONDARY\"} * on (name) group_left mongodb_mongod_replset_my_name{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"})) or vector(0)",
+              "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Lag",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -838,13 +682,14 @@
             "rightMax": null,
             "rightMin": null
           },
+          "hideTimeOverride": false,
           "id": 12,
           "legend": {
             "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
             "show": true,
             "total": false,
             "values": true
@@ -864,18 +709,20 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max(changes(mongodb_mongod_replset_member_election_date{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]))",
+              "expr": "time() - mongodb_mongod_replset_member_election_date{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
+              "format": "time_series",
+              "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "Count",
+              "legendFormat": "Host -- {{host}}",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Elections",
+          "title": "Time since Last Election",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -898,11 +745,11 @@
           ],
           "yaxes": [
             {
-              "format": "short",
+              "format": "s",
               "label": "",
               "logBase": 1,
               "max": null,
-              "min": 0,
+              "min": null,
               "show": true
             },
             {
@@ -975,7 +822,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_replset_member_uptime{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_replset_member_uptime{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -983,7 +830,7 @@
               "legendFormat": "{{ name }} - {{state}}",
               "metric": "",
               "refId": "J",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1075,7 +922,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "time() - max(mongodb_mongod_replset_member_last_heartbeat{job=\"kubernetes-pods\",instance=\"$host\"}) by (name) * on (name) group_right mongodb_mongod_replset_my_name{job=\"kubernetes-pods\"}",
+              "expr": "time() - max(mongodb_mongod_replset_member_last_heartbeat{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}) by (name) * on (name) group_right mongodb_mongod_replset_my_name{job=\"kubernetes-pods\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1083,7 +930,7 @@
               "legendFormat": "{{instance}}",
               "metric": "",
               "refId": "J",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1189,14 +1036,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_replset_member_ping_ms{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_replset_member_ping_ms{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "{{name}} - {{state}}",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1287,12 +1134,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "{{instance}}",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1395,29 +1242,29 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_num_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_num_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Document Preload",
               "metric": "mongodb_mongod_metrics_repl_preload_indexes_num_total",
               "refId": "A",
-              "step": 30
+              "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_num_total{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_num_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_num_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Index Preload",
               "metric": "mongodb_mongod_metrics_repl_preload_indexes_num_total",
               "refId": "B",
-              "step": 30
+              "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_apply_ops_total{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_ops_total{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_apply_ops_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_ops_total{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "intervalFactor": 2,
               "legendFormat": "Batch Apply",
               "refId": "C",
-              "step": 10
+              "step": 120
             }
           ],
           "thresholds": [],
@@ -1508,30 +1355,30 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Document Preload",
               "refId": "A",
-              "step": 30
+              "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Index Preload",
               "metric": "mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds",
               "refId": "B",
-              "step": 30
+              "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{job=\"kubernetes-pods\",instance=\"$host\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}[5m])",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Batch Apply",
               "metric": "mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds",
               "refId": "C",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1634,12 +1481,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_metrics_repl_buffer_count{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_metrics_repl_buffer_count{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Current",
               "refId": "A",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1730,20 +1577,20 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_metrics_repl_buffer_size_bytes{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_metrics_repl_buffer_size_bytes{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Used",
               "refId": "A",
-              "step": 30
+              "step": 300
             },
             {
-              "expr": "mongodb_mongod_metrics_repl_buffer_max_size_bytes{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "expr": "mongodb_mongod_metrics_repl_buffer_max_size_bytes{job=\"kubernetes-pods\",kubernetes_pod_name=\"$host\"}",
               "interval": "$interval",
               "intervalFactor": 1,
               "legendFormat": "Max",
               "refId": "B",
-              "step": 30
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1922,8 +1769,8 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "catalogdb-1",
-          "value": "catalogdb-1"
+          "text": "catalogdb-0",
+          "value": "catalogdb-0"
         },
         "datasource": "prometheus",
         "hide": 0,
@@ -1933,7 +1780,7 @@
         "multiFormat": "glob",
         "name": "host",
         "options": [],
-        "query": "label_values(mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",cluster=~\"$cluster\", set=\"$replset\"}, instance)",
+        "query": "label_values(mongodb_mongod_replset_my_state{job=\"kubernetes-pods\",cluster=~\"$cluster\", set=\"$replset\"}, kubernetes_pod_name)",
         "refresh": 1,
         "regex": "",
         "sort": 1,
@@ -1946,8 +1793,8 @@
     ]
   },
   "time": {
-    "from": "2017-07-13T20:37:46.578Z",
-    "to": "2017-07-13T22:12:51.023Z"
+    "from": "now-12h",
+    "to": "now"
   },
   "timepicker": {
     "now": true,
@@ -1977,5 +1824,5 @@
   },
   "timezone": "browser",
   "title": "MongoDB ReplSet",
-  "version": 4
+  "version": 5
 }
