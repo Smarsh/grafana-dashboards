@@ -625,7 +625,7 @@
           "legend": {
             "alignAsTable": true,
             "avg": true,
-            "current": false,
+            "current": true,
             "max": true,
             "min": true,
             "show": true,
@@ -648,6 +648,7 @@
           "targets": [
             {
               "expr": "time()-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "format": "time_series",
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
@@ -658,6 +659,7 @@
             },
             {
               "expr": "mongodb_mongod_replset_oplog_head_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}-mongodb_mongod_replset_oplog_tail_timestamp{job=\"kubernetes-pods\",instance=\"$host\"}",
+              "format": "time_series",
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1073,7 +1075,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "time() - max(mongodb_mongod_replset_member_last_heartbeat{job=\"kubernetes-pods\",instance=\"$host\"}) by (name) * on (name) group_right mongodb_mongod_replset_my_name",
+              "expr": "time() - max(mongodb_mongod_replset_member_last_heartbeat{job=\"kubernetes-pods\",instance=\"$host\"}) by (name) * on (name) group_right mongodb_mongod_replset_my_name{job=\"kubernetes-pods\"}",
+              "format": "time_series",
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1918,8 +1921,9 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "catalogdb-0",
-          "value": "catalogdb-0"
+          "tags": [],
+          "text": "catalogdb-1",
+          "value": "catalogdb-1"
         },
         "datasource": "prometheus",
         "hide": 0,
@@ -1973,5 +1977,5 @@
   },
   "timezone": "browser",
   "title": "MongoDB ReplSet",
-  "version": 2
+  "version": 4
 }
