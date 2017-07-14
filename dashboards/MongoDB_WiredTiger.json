@@ -430,7 +430,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -516,7 +516,7 @@
               "intervalFactor": 1,
               "legendFormat": "Read into",
               "refId": "A",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "rate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"written\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"written\"}[5m])",
@@ -527,7 +527,7 @@
               "legendFormat": "Written from",
               "metric": "",
               "refId": "B",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -624,7 +624,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -711,7 +711,7 @@
               "legendFormat": "Cursors",
               "metric": "",
               "refId": "A",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "mongodb_mongod_wiredtiger_session_open_sessions_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
@@ -721,7 +721,7 @@
               "legendFormat": "Sessions",
               "metric": "",
               "refId": "B",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -822,7 +822,7 @@
               "legendFormat": "{{type}}",
               "metric": "",
               "refId": "B",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -907,7 +907,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "J",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1009,7 +1009,7 @@
               "legendFormat": "current",
               "metric": "",
               "refId": "A",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
@@ -1019,7 +1019,7 @@
               "legendFormat": "{{type}}",
               "metric": "",
               "refId": "B",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1104,7 +1104,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1204,7 +1204,7 @@
               "intervalFactor": 1,
               "legendFormat": "Max",
               "refId": "C",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "mongodb_mongod_wiredtiger_cache_bytes{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"total\"}",
@@ -1214,7 +1214,7 @@
               "intervalFactor": 1,
               "legendFormat": "Used",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1297,7 +1297,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1395,7 +1395,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1480,7 +1480,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{type}}",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1578,7 +1578,7 @@
               "legendFormat": "{{type}}",
               "metric": "",
               "refId": "A",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1666,7 +1666,7 @@
               "intervalFactor": 1,
               "legendFormat": "{{state}}",
               "refId": "J",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"delete\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"delete\"}[5m])",
@@ -1676,7 +1676,7 @@
               "intervalFactor": 1,
               "legendFormat": "repl_deleted",
               "refId": "A",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"update\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"update\"}[5m])",
@@ -1686,7 +1686,7 @@
               "intervalFactor": 1,
               "legendFormat": "repl_updated",
               "refId": "B",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"insert\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"insert\"}[5m])",
@@ -1696,7 +1696,7 @@
               "intervalFactor": 1,
               "legendFormat": "repl_inserted",
               "refId": "C",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "rate(mongodb_mongod_metrics_ttl_deleted_documents_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_ttl_deleted_documents_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
@@ -1706,7 +1706,7 @@
               "intervalFactor": 1,
               "legendFormat": "ttl_deleted",
               "refId": "D",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1805,7 +1805,7 @@
               "legendFormat": "{{state}}",
               "metric": "",
               "refId": "A",
-              "step": 120
+              "step": 300
             },
             {
               "expr": "rate(mongodb_mongod_metrics_record_moves_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_record_moves_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
@@ -1814,7 +1814,7 @@
               "intervalFactor": 1,
               "legendFormat": "moved",
               "refId": "B",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -1897,7 +1897,7 @@
               "intervalFactor": 1,
               "legendFormat": "Faults",
               "refId": "J",
-              "step": 120
+              "step": 300
             }
           ],
           "thresholds": [],
@@ -2044,9 +2044,8 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "catalogdb-0",
-          "value": "catalogdb-0"
+          "text": "catalogdb-1",
+          "value": "catalogdb-1"
         },
         "datasource": "prometheus",
         "hide": 0,
@@ -2056,7 +2055,7 @@
         "multiFormat": "glob",
         "name": "host",
         "options": [],
-        "query": "label_values(mongodb_mongod_storage_engine{cluster=~\"$cluster\", engine=\"wiredTiger\"}, instance)",
+        "query": "label_values(mongodb_mongod_storage_engine{cluster=~\"$cluster\", engine=\"wiredTiger\"}, kubernetes_pod_name)",
         "refresh": 1,
         "regex": "",
         "sort": 1,
@@ -2069,8 +2068,8 @@
     ]
   },
   "time": {
-    "from": "2017-07-14T06:44:15.500Z",
-    "to": "2017-07-14T17:47:54.800Z"
+    "from": "now-12h",
+    "to": "now"
   },
   "timepicker": {
     "now": true,
@@ -2100,5 +2099,5 @@
   },
   "timezone": "browser",
   "title": "MongoDB WiredTiger",
-  "version": 5
+  "version": 7
 }
