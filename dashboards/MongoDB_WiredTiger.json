@@ -99,7 +99,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "mongodb_mongod_wiredtiger_cache_bytes{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"total\"}",
+              "expr": "mongodb_mongod_wiredtiger_cache_bytes{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"total\"}",
               "format": "time_series",
               "hide": false,
               "interval": "5m",
@@ -182,7 +182,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "mongodb_mongod_wiredtiger_cache_max_bytes{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_cache_max_bytes{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "interval": "5m",
               "intervalFactor": 1,
@@ -264,7 +264,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "container_memory_cache{container_name=\"mongodb\", pod_name= \"$host\",job=\"kubernetes-nodes\"}",
+              "expr": "container_memory_cache{container_name=\"mongodb\", pod_name= \"$host\",job=\"kubernetes-nodes\",namespace=\"qa\"}",
               "format": "time_series",
               "hide": false,
               "interval": "5m",
@@ -352,7 +352,7 @@
               "calculatedInterval": "10m",
               "datasourceErrors": {},
               "errors": {},
-              "expr": "(node_memory_MemAvailable{instance=\"$host\",job=\"kubernetes-pods\"} or (node_memory_MemFree{instance=\"$host\",job=\"kubernetes-pods\"} + node_memory_Buffers{instance=\"$host\",job=\"kubernetes-pods\"} + node_memory_Cached{instance=\"$host\",job=\"kubernetes-pods\"})) / node_memory_MemTotal{instance=\"$host\",job=\"kubernetes-pods\"} * 100",
+              "expr": "(node_memory_MemAvailable{instance=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"} or (node_memory_MemFree{instance=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"} + node_memory_Buffers{instance=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"} + node_memory_Cached{instance=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"})) / node_memory_MemTotal{instance=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"} * 100",
               "format": "time_series",
               "interval": "5m",
               "intervalFactor": 1,
@@ -423,7 +423,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_transactions_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_transactions_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_transactions_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_transactions_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -509,7 +509,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"read\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"read\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"read\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"read\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -519,7 +519,7 @@
               "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"written\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"written\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"written\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"written\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -618,7 +618,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_blockmanager_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_blockmanager_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_blockmanager_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_blockmanager_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -703,7 +703,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_wiredtiger_session_open_cursors_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_session_open_cursors_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -714,7 +714,7 @@
               "step": 300
             },
             {
-              "expr": "mongodb_mongod_wiredtiger_session_open_sessions_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_session_open_sessions_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -815,7 +815,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_wiredtiger_concurrent_transactions_total_tickets{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}-mongodb_mongod_wiredtiger_concurrent_transactions_out_tickets{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_concurrent_transactions_total_tickets{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}-mongodb_mongod_wiredtiger_concurrent_transactions_out_tickets{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -900,7 +900,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_global_lock_current_queue{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_global_lock_current_queue{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1002,7 +1002,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1012,7 +1012,7 @@
               "step": 300
             },
             {
-              "expr": "mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_transactions_checkpoint_milliseconds{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1098,7 +1098,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_cache_evicted_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_evicted_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_cache_evicted_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_evicted_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1197,7 +1197,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_wiredtiger_cache_max_bytes{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_cache_max_bytes{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1207,7 +1207,7 @@
               "step": 300
             },
             {
-              "expr": "mongodb_mongod_wiredtiger_cache_bytes{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"total\"}",
+              "expr": "mongodb_mongod_wiredtiger_cache_bytes{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"total\"}",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1291,7 +1291,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "mongodb_mongod_wiredtiger_cache_pages{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}",
+              "expr": "mongodb_mongod_wiredtiger_cache_pages{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1389,7 +1389,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_log_operations_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_log_operations_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_log_operations_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_log_operations_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1474,7 +1474,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_log_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_log_bytes_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_log_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_log_bytes_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1571,7 +1571,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_wiredtiger_log_records_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_log_records_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_wiredtiger_log_records_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_wiredtiger_log_records_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1659,7 +1659,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_metrics_document_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_document_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_document_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_document_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1669,7 +1669,7 @@
               "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"delete\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"delete\"}[5m])",
+              "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"delete\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"delete\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1679,7 +1679,7 @@
               "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"update\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"update\"}[5m])",
+              "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"update\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"update\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1689,7 +1689,7 @@
               "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"insert\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\", type=\"insert\"}[5m])",
+              "expr": "rate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"insert\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\", type=\"insert\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1699,7 +1699,7 @@
               "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_metrics_ttl_deleted_documents_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_ttl_deleted_documents_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_ttl_deleted_documents_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_ttl_deleted_documents_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
@@ -1798,7 +1798,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_metrics_query_executor_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_query_executor_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_query_executor_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_query_executor_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1808,7 +1808,7 @@
               "step": 300
             },
             {
-              "expr": "rate(mongodb_mongod_metrics_record_moves_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_record_moves_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_metrics_record_moves_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_metrics_record_moves_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
@@ -1890,7 +1890,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(mongodb_mongod_extra_info_page_faults_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_extra_info_page_faults_total{kubernetes_pod_name=\"$host\",job=\"kubernetes-pods\"}[5m])",
+              "expr": "rate(mongodb_mongod_extra_info_page_faults_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[$interval]) or irate(mongodb_mongod_extra_info_page_faults_total{kubernetes_pod_name=\"$host\",kubernetes_namespace=\"qa\", job=\"kubernetes-pods\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "$interval",
