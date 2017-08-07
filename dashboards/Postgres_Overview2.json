@@ -504,7 +504,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "container_memory_swap{image!=\"\",name=~\"^k8s_.*\", pod_name=\"$host\",container_name=~\".*postgres.*\"}",
+              "expr": "container_memory_swap{pod_name=\"$host\",container_name=~\".*postgres.*\",namespace=\"qa\",job=\"kubernetes-nodes\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -513,8 +513,9 @@
               "step": 40
             },
             {
-              "expr": "container_memory_usage_bytes{image!=\"\",name=~\"^k8s_.*\", pod_name=\"$host\",container_name=~\".*postgres.*\"}",
+              "expr": "container_memory_usage_bytes{pod_name=\"$host\",container_name=~\".*postgres.*\",namespace=\"qa\",job=\"kubernetes-nodes\"}",
               "format": "time_series",
+              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "In-Use",
@@ -1498,7 +1499,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(idelta(pg_stat_database_xact_rollback{job=\"kubernetes-pods\", kubernetes_namespace=\"qa\",datname=~\"$db\",datname!~\"postgres|template0|template1\",kubernetes_pod_name=\"$host\"}[5m])) by (datname)",
+              "expr": "sum(rate(pg_stat_database_xact_rollback{job=\"kubernetes-pods\", kubernetes_namespace=\"qa\",datname=~\"$db\",datname!~\"postgres|template0|template1\",kubernetes_pod_name=\"$host\"}[5m])) by (datname)",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -1692,7 +1693,7 @@
           "tableColumn": "Value",
           "targets": [
             {
-              "expr": "sum(irate(pg_stat_database_xact_commit{job=\"kubernetes-pods\", kubernetes_namespace=\"qa\",datname=~\"$db\",kubernetes_pod_name=\"$host\"}[5m])) + sum(irate(pg_stat_database_xact_rollback{job=\"kubernetes-pods\", kubernetes_namespace=\"qa\",datname=~\"$db\",kubernetes_pod_name=\"$host\"}[5m]))",
+              "expr": "sum(rate(pg_stat_database_xact_commit{job=\"kubernetes-pods\", kubernetes_namespace=\"qa\",datname=~\"$db\",kubernetes_pod_name=\"$host\"}[5m])) + sum(rate(pg_stat_database_xact_rollback{job=\"kubernetes-pods\", kubernetes_namespace=\"qa\",datname=~\"$db\",kubernetes_pod_name=\"$host\"}[5m]))",
               "format": "time_series",
               "intervalFactor": 3,
               "legendFormat": "",
@@ -1733,7 +1734,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "admindb-postgresql-0",
           "value": "admindb-postgresql-0"
         },
@@ -1757,7 +1757,6 @@
       {
         "allValue": ".*",
         "current": {
-          "tags": [],
           "text": "admin",
           "value": "admin"
         },
@@ -1811,5 +1810,5 @@
   },
   "timezone": "browser",
   "title": "Postgres Overview 2",
-  "version": 1
+  "version": 2
 }
